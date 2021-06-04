@@ -16,6 +16,9 @@
 		05DE7DA22668709F00C3A05F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05DE7DA12668709E00C3A05F /* GoogleService-Info.plist */; };
 		05DE7DA4266871E000C3A05F /* CreateNewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DA3266871E000C3A05F /* CreateNewUserViewController.swift */; };
 		05DE7DA72669BB6500C3A05F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DA62669BB6500C3A05F /* Util.swift */; };
+		05DE7DA92669C4DD00C3A05F /* InputProfileTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DA82669C4DD00C3A05F /* InputProfileTextController.swift */; };
+		05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DAB2669C6D600C3A05F /* Manager.swift */; };
+		05DE7DAE2669D22E00C3A05F /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */; };
 		D6125FEC0DA22F50406D4DAC /* Pods_MatchApp0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56505FCD71B37139B5F7F7E7 /* Pods_MatchApp0.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,9 @@
 		05DE7DA12668709E00C3A05F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		05DE7DA3266871E000C3A05F /* CreateNewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewUserViewController.swift; sourceTree = "<group>"; };
 		05DE7DA62669BB6500C3A05F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		05DE7DA82669C4DD00C3A05F /* InputProfileTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileTextController.swift; sourceTree = "<group>"; };
+		05DE7DAB2669C6D600C3A05F /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		56505FCD71B37139B5F7F7E7 /* Pods_MatchApp0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchApp0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6A2F925B3773CADDECFCFD /* Pods-MatchApp0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchApp0.debug.xcconfig"; path = "Target Support Files/Pods-MatchApp0/Pods-MatchApp0.debug.xcconfig"; sourceTree = "<group>"; };
 		A600514616F2BD5CAC27D9F5 /* Pods-MatchApp0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchApp0.release.xcconfig"; path = "Target Support Files/Pods-MatchApp0/Pods-MatchApp0.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +78,7 @@
 				05DE7DA52669BB3B00C3A05F /* Util */,
 				05DE7D8B26686CB200C3A05F /* AppDelegate.swift */,
 				05DE7D8D26686CB200C3A05F /* SceneDelegate.swift */,
+				05DE7DAA2669C6B300C3A05F /* Model */,
 				05DE7D9F26686FFE00C3A05F /* Controller */,
 				05DE7DA02668706F00C3A05F /* View */,
 				05DE7D9426686CB400C3A05F /* Assets.xcassets */,
@@ -87,6 +94,7 @@
 			children = (
 				05DE7D8F26686CB200C3A05F /* ViewController.swift */,
 				05DE7DA3266871E000C3A05F /* CreateNewUserViewController.swift */,
+				05DE7DA82669C4DD00C3A05F /* InputProfileTextController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -105,6 +113,15 @@
 				05DE7DA62669BB6500C3A05F /* Util.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		05DE7DAA2669C6B300C3A05F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05DE7DAB2669C6D600C3A05F /* Manager.swift */,
+				05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		26083D541EE326ABE2BEF81A /* Frameworks */ = {
@@ -239,10 +256,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05DE7DAE2669D22E00C3A05F /* UserDataModel.swift in Sources */,
 				05DE7DA4266871E000C3A05F /* CreateNewUserViewController.swift in Sources */,
 				05DE7D9026686CB200C3A05F /* ViewController.swift in Sources */,
 				05DE7DA72669BB6500C3A05F /* Util.swift in Sources */,
 				05DE7D8C26686CB200C3A05F /* AppDelegate.swift in Sources */,
+				05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */,
+				05DE7DA92669C4DD00C3A05F /* InputProfileTextController.swift in Sources */,
 				05DE7D8E26686CB200C3A05F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

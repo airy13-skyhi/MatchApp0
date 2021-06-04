@@ -32,8 +32,8 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     @IBOutlet weak var jobTextField: UITextField!
     @IBOutlet weak var quickWordTextField: UITextField!
     
-    
-    
+    @IBOutlet weak var toProfileButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     
 
@@ -63,8 +63,8 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
         
         gender = "男性"
         
-        
-        
+        Util.rectButton(button: toProfileButton)
+        Util.rectButton(button: doneButton)
         
     }
     
@@ -88,7 +88,7 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
             dataStringArray = ["A型","B型","O型","AB型"]
             return dataStringArray.count
         case 4:
-            dataStringArray = ["A型","B型","O型","AB型"]
+            dataStringArray = Util.prefectures()
             return dataStringArray.count
             
         default:
@@ -99,6 +99,79 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     
     
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        switch pickerView.tag {
+        
+        case 1:
+            ageTextField.text = String(dataIntArray[row]) + "歳"
+            ageTextField.resignFirstResponder()
+            break
+        case 2:
+            heightTextField.text = String(dataIntArray[row]) + "cm"
+            heightTextField.resignFirstResponder()
+            break
+        case 3:
+            bloodTypeTextField.text = dataStringArray[row] + "型"
+            bloodTypeTextField.resignFirstResponder()
+            break
+        case 4:
+            addressTextField.text = dataStringArray[row]
+            addressTextField.resignFirstResponder()
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        switch pickerView.tag {
+        case 1:
+            return String(dataIntArray[row]) + "歳"
+        case 2:
+            return String(dataIntArray[row]) + "cm"
+        case 3:
+            return dataStringArray[row] + "型"
+        case 4:
+            return dataStringArray[row]
+            
+        default:
+            return ""
+        }
+        
+    }
+    
     
 
+    @IBAction func genderSwitch(_ sender: UISegmentedControl) {
+        
+        if sender.selectedSegmentIndex == 0 {
+            gender = "男性"
+            
+        }else {
+            gender = "女性"
+        }
+        
+        
+        
+    }
+    
+    
+    @IBAction func done(_ sender: Any) {
+        
+        let manager = Manager.shared
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
 }

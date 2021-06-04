@@ -88,16 +88,25 @@
                                     <segment title="男性"/>
                                     <segment title="女性"/>
                                 </segments>
+                                <connections>
+                                    <action selector="genderSwitch:" destination="cXZ-mL-M12" eventType="valueChanged" id="Jv0-wb-Ssw"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zv-bP-gcY">
                                 <rect key="frame" x="43" y="780" width="138" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="プロフィール記入"/>
+                                <connections>
+                                    <segue destination="kIA-O3-Icq" kind="presentation" modalPresentationStyle="fullScreen" id="ZCr-4v-QPn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giA-me-n4R">
                                 <rect key="frame" x="221" y="780" width="138" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="決定"/>
+                                <connections>
+                                    <action selector="done:" destination="cXZ-mL-M12" eventType="touchUpInside" id="Svr-P6-kfT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pbe-FQ-1Ft"/>
@@ -107,15 +116,55 @@
                         <outlet property="addressTextField" destination="I18-0y-Ps9" id="N6C-I1-lP4"/>
                         <outlet property="ageTextField" destination="Rha-wA-0a6" id="4L2-A9-gJo"/>
                         <outlet property="bloodTypeTextField" destination="uK3-iZ-wGI" id="bJ6-Fo-ji6"/>
+                        <outlet property="doneButton" destination="giA-me-n4R" id="zgQ-Kl-yHM"/>
                         <outlet property="heightTextField" destination="WTU-8U-J6F" id="b3j-cM-LX6"/>
                         <outlet property="jobTextField" destination="Qj0-Ad-LUf" id="vvO-jQ-PtX"/>
                         <outlet property="nicnameTextField" destination="0DG-Xn-G9U" id="d8X-Oo-9a5"/>
                         <outlet property="quickWordTextField" destination="zrR-rY-Rwp" id="Xvr-zl-cvQ"/>
+                        <outlet property="toProfileButton" destination="9zv-bP-gcY" id="Qnv-1f-w4c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfx-Y6-0FZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1544.6153846153845" y="768.48341232227483"/>
+        </scene>
+        <!--Input Profile Text Controller-->
+        <scene sceneID="odc-yn-FVG">
+            <objects>
+                <viewController id="kIA-O3-Icq" customClass="InputProfileTextController" customModule="MatchApp0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8M7-Ok-i91">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="プロフィールを記載してください" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XKb-UX-EsX">
+                                <rect key="frame" x="38" y="65" width="314" height="566"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKj-b5-dsy">
+                                <rect key="frame" x="58" y="667" width="275" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <state key="normal" title="決定"/>
+                                <connections>
+                                    <action selector="done:" destination="kIA-O3-Icq" eventType="touchUpInside" id="yMn-u6-qmo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="s8y-ew-FoY"/>
+                        <color key="backgroundColor" red="0.0" green="0.77326074601507255" blue="0.78801371169975543" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="aKj-b5-dsy" id="22M-dk-s3k"/>
+                        <outlet property="profileTextView" destination="XKb-UX-EsX" id="n1q-81-BEX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Vf-nC-p7T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2293.8461538461538" y="767.7725118483412"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="uZ2-sU-AoH">
@@ -155,6 +204,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
