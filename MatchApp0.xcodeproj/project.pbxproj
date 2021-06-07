@@ -19,6 +19,7 @@
 		05DE7DA92669C4DD00C3A05F /* InputProfileTextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DA82669C4DD00C3A05F /* InputProfileTextController.swift */; };
 		05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DAB2669C6D600C3A05F /* Manager.swift */; };
 		05DE7DAE2669D22E00C3A05F /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */; };
+		05DE7DB02669DA5A00C3A05F /* SendDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7DAF2669DA5A00C3A05F /* SendDBModel.swift */; };
 		D6125FEC0DA22F50406D4DAC /* Pods_MatchApp0.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56505FCD71B37139B5F7F7E7 /* Pods_MatchApp0.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		05DE7DA82669C4DD00C3A05F /* InputProfileTextController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputProfileTextController.swift; sourceTree = "<group>"; };
 		05DE7DAB2669C6D600C3A05F /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
+		05DE7DAF2669DA5A00C3A05F /* SendDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDBModel.swift; sourceTree = "<group>"; };
 		56505FCD71B37139B5F7F7E7 /* Pods_MatchApp0.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MatchApp0.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C6A2F925B3773CADDECFCFD /* Pods-MatchApp0.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchApp0.debug.xcconfig"; path = "Target Support Files/Pods-MatchApp0/Pods-MatchApp0.debug.xcconfig"; sourceTree = "<group>"; };
 		A600514616F2BD5CAC27D9F5 /* Pods-MatchApp0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MatchApp0.release.xcconfig"; path = "Target Support Files/Pods-MatchApp0/Pods-MatchApp0.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				05DE7DAB2669C6D600C3A05F /* Manager.swift */,
 				05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */,
+				05DE7DAF2669DA5A00C3A05F /* SendDBModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				05DE7DA72669BB6500C3A05F /* Util.swift in Sources */,
 				05DE7D8C26686CB200C3A05F /* AppDelegate.swift in Sources */,
 				05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */,
+				05DE7DB02669DA5A00C3A05F /* SendDBModel.swift in Sources */,
 				05DE7DA92669C4DD00C3A05F /* InputProfileTextController.swift in Sources */,
 				05DE7D8E26686CB200C3A05F /* SceneDelegate.swift in Sources */,
 			);

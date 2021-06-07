@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
-class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+
+class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfileSendDone {
+    
     
     
     
@@ -19,11 +23,13 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     var dataStringArray = [String]()
     var dataIntArray = [Int]()
     
+    var fbAuth = Auth.auth()
     
     var gender = String()
     
     
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var nicnameTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
@@ -36,7 +42,7 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     @IBOutlet weak var doneButton: UIButton!
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +76,7 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     
     
     
-
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -145,7 +151,7 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     }
     
     
-
+    
     @IBAction func genderSwitch(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
@@ -162,15 +168,86 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     
     @IBAction func done(_ sender: Any) {
         
-        let manager = Manager.shared
+        let manager = Manager.shared.profile
         
-        
+        fbAuth.signInAnonymously { result, error in
+            
+            if error != nil {
+                print(error.debugDescription)
+                return
+            }
+            
+            if let range0 = self.ageTextField.text?.range(of: "歳") {
+                self.ageTextField.text?.replaceSubrange(range0, with: "")
+            }
+            
+            if let range1 = self.heightTextField.text?.range(of: "cm") {
+                self.heightTextField.text?.replaceSubrange(range1, with: "")
+            }
+            
+            
+            let userData = UserDataModel(name: self.nicnameTextField.text, age: self.ageTextField.text, height: self.heightTextField.text, bloodType: self.bloodTypeTextField.text, prefecture: self.addressTextField.text, gender: self.gender, profile: manager, profileImageString: "", uid: self.fbAuth.currentUser?.uid, quickWord: self.quickWordTextField.text, job: self.jobTextField.text, date: Date().timeIntervalSince1970, onlineORNot: true)
+            
+            let sendDBModel = SendDBModel()
+            sendDBModel.profileSendDone = self
+            sendDBModel.sendProfileData(userData: userData, profileImageData: (self.imageView.image?.jpegData(compressionQuality: 0.4))!)
+            
+            
+            
+        }
         
         
     }
     
     
     
+    func profileSendDone() {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
+    @IBAction func tap(_ sender: Any) {
+        
+        func openCamera() {
+            let sourceType:UIImagePickerController.SourceType = .photoLibrary
+            // カメラが利用可能かチェック
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+                // インスタンスの作成
+                let cameraPicker = UIImagePickerController()
+                cameraPicker.sourceType = sourceType
+                cameraPicker.delegate = self
+                cameraPicker.allowsEditing = true
+                //cameraPicker.showsCameraControls = true
+                present(cameraPicker, animated: true, completion: nil)
+                
+            }else {
+                
+            }
+            
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            
+            
+            if let pickedImage = info[.editedImage] as? UIImage {
+                imageView.image = pickedImage
+                //閉じる処理
+                picker.dismiss(animated: true, completion: nil)
+            }
+            
+        }
+        
+        // 撮影がキャンセルされた時に呼ばれる
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true, completion: nil)
+        }
+        
+        
+    }
     
     
     

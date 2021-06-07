@@ -20,7 +20,7 @@ struct UserDataModel:Equatable {
     let profileImageString:String?
     let uid:String?
     let quickWord:String?
-    let word:String?
+    let job:String?
     let date:Double?
     let onlineORNot:Bool?
     
