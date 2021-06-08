@@ -7,12 +7,13 @@
 
 import UIKit
 import Firebase
-
+import AVFoundation
 
 
 class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfileSendDone {
     
     
+    var player = AVPlayer()
     
     
     var agePicker = UIPickerView()
@@ -46,12 +47,12 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpVideo()
         
         ageTextField.inputView = agePicker
         heightTextField.inputView = heightPicker
         bloodTypeTextField.inputView = bloodPicker
         addressTextField.inputView = prefecturePicker
-        
         
         agePicker.delegate = self
         agePicker.dataSource = self
@@ -212,42 +213,78 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
     
     @IBAction func tap(_ sender: Any) {
         
-        func openCamera() {
-            let sourceType:UIImagePickerController.SourceType = .photoLibrary
-            // カメラが利用可能かチェック
-            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-                // インスタンスの作成
-                let cameraPicker = UIImagePickerController()
-                cameraPicker.sourceType = sourceType
-                cameraPicker.delegate = self
-                cameraPicker.allowsEditing = true
-                //cameraPicker.showsCameraControls = true
-                present(cameraPicker, animated: true, completion: nil)
-                
-            }else {
-                
-            }
-            
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            
-            
-            if let pickedImage = info[.editedImage] as? UIImage {
-                imageView.image = pickedImage
-                //閉じる処理
-                picker.dismiss(animated: true, completion: nil)
-            }
-            
-        }
-        
-        // 撮影がキャンセルされた時に呼ばれる
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            picker.dismiss(animated: true, completion: nil)
-        }
-        
+        openCamera()
         
     }
+    
+    
+    
+    func openCamera() {
+        let sourceType:UIImagePickerController.SourceType = .photoLibrary
+        // カメラが利用可能かチェック
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            // インスタンスの作成
+            let cameraPicker = UIImagePickerController()
+            cameraPicker.sourceType = sourceType
+            cameraPicker.delegate = self
+            cameraPicker.allowsEditing = true
+            //cameraPicker.showsCameraControls = true
+            present(cameraPicker, animated: true, completion: nil)
+            
+        }else {
+            
+        }
+    }
+    
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        if let pickedImage = info[.editedImage] as? UIImage {
+            imageView.image = pickedImage
+            //閉じる処理
+            picker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    // 撮影がキャンセルされた時に呼ばれる
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func setUpVideo() {
+        //ファイルパス
+        player = AVPlayer(url: URL(string: "https://firebasestorage.googleapis.com/v0/b/swiftmatchapp.appspot.com/o/backVideo.mp4?alt=media&token=77eaa1de-bd7d-4854-95e2-25e75082c1d4")!)
+        
+        //AVPlayer用のレイヤーを生成
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height)
+        
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLayer.repeatCount = 0 //無限ループ(終わったらまた再生のイベント後述)
+        playerLayer.zPosition = -1
+        view.layer.insertSublayer(playerLayer, at: 0)
+        
+        //終わったらまた再生
+        NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: player.currentItem,
+            queue: .main) { (_) in
+            
+            self.player.seek(to: .zero)//開始時間に戻す
+            self.player.play()
+            
+        }
+        
+        self.player.play()
+    }
+    
+    
+    
+    
     
     
     

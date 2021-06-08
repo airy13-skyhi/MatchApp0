@@ -49,6 +49,10 @@ class SendDBModel {
                     self.db.collection("Users").document(Auth.auth().currentUser!.uid).setData(["name":userData.name as Any, "age":userData.age as Any, "height":userData.height as Any, "bloodType":userData.bloodType as Any, "prefecture":userData.prefecture as Any, "gender":userData.gender as Any, "profile":userData.profile as Any, "profileImageString":url?.absoluteString as Any, "uid":Auth.auth().currentUser!.uid as Any, "quickWord":userData.quickWord as Any, "job":userData.job as Any, "onlineORNot":userData.onlineORNot as Any])
                     
                     
+                    KeyChainConfig.setKeyData(value: ["name":userData.name as Any, "age":userData.age as Any, "height":userData.height as Any, "bloodType":userData.bloodType as Any, "prefecture":userData.prefecture as Any, "gender":userData.gender as Any, "profile":userData.profile as Any, "profileImageString":url?.absoluteString as Any, "uid":Auth.auth().currentUser!.uid as Any, "quickWord":userData.quickWord as Any, "job":userData.job as Any], key: "userData")
+                    
+                    var userData = KeyChainConfig.getkeyData(key: "userData")
+                    
                     
                 }
                 self.profileSendDone?.profileSendDone()
