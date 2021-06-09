@@ -10,6 +10,7 @@
 		05AF6FAC266F12B4006D30DE /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 05AF6FAB266F12B4006D30DE /* heart.json */; };
 		05AF6FAE266F15ED006D30DE /* KeyChainConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AF6FAD266F15ED006D30DE /* KeyChainConfig.swift */; };
 		05AF6FB0266F18AF006D30DE /* HumansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AF6FAF266F18AF006D30DE /* HumansViewController.swift */; };
+		05AF6FB2266F21A1006D30DE /* LoadDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AF6FB1266F21A1006D30DE /* LoadDBModel.swift */; };
 		05DE7D8C26686CB200C3A05F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8B26686CB200C3A05F /* AppDelegate.swift */; };
 		05DE7D8E26686CB200C3A05F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8D26686CB200C3A05F /* SceneDelegate.swift */; };
 		05DE7D9026686CB200C3A05F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8F26686CB200C3A05F /* ViewController.swift */; };
@@ -30,6 +31,7 @@
 		05AF6FAB266F12B4006D30DE /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = heart.json; path = Resources/MatchImageResources/heart.json; sourceTree = SOURCE_ROOT; };
 		05AF6FAD266F15ED006D30DE /* KeyChainConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainConfig.swift; sourceTree = "<group>"; };
 		05AF6FAF266F18AF006D30DE /* HumansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumansViewController.swift; sourceTree = "<group>"; };
+		05AF6FB1266F21A1006D30DE /* LoadDBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadDBModel.swift; sourceTree = "<group>"; };
 		05DE7D8826686CB200C3A05F /* MatchApp0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchApp0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DE7D8B26686CB200C3A05F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05DE7D8D26686CB200C3A05F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				05DE7DAB2669C6D600C3A05F /* Manager.swift */,
 				05DE7DAD2669D22E00C3A05F /* UserDataModel.swift */,
 				05DE7DAF2669DA5A00C3A05F /* SendDBModel.swift */,
+				05AF6FB1266F21A1006D30DE /* LoadDBModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				05DE7D9026686CB200C3A05F /* ViewController.swift in Sources */,
 				05DE7DA72669BB6500C3A05F /* Util.swift in Sources */,
 				05DE7D8C26686CB200C3A05F /* AppDelegate.swift in Sources */,
+				05AF6FB2266F21A1006D30DE /* LoadDBModel.swift in Sources */,
 				05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */,
 				05DE7DB02669DA5A00C3A05F /* SendDBModel.swift in Sources */,
 				05DE7DA92669C4DD00C3A05F /* InputProfileTextController.swift in Sources */,
