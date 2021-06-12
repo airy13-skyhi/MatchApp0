@@ -314,6 +314,11 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Sb-GU-sQq">
+                                <rect key="frame" x="168" y="655" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="notLike"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="u3T-DR-Uxc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -330,6 +335,7 @@
     </scenes>
     <resources>
         <image name="ashiato" width="128" height="128"/>
+        <image name="notLike" width="64" height="64"/>
         <image name="online" width="40" height="40"/>
         <image name="search" width="64" height="64"/>
         <systemColor name="labelColor">

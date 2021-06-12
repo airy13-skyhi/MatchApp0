@@ -54,12 +54,41 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             return cell
             
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileTextCell.identifire, for: indexPath) as! ProfileTextCell
+            
+            cell.profileTextView.text = userDataModel?.profile
+            
+            return cell
+            
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ProfileDetailCell.identifire, for: indexPath) as! ProfileDetailCell
+            
+            cell.configure(nicnameLabelString: (userDataModel?.name)!, ageLabelString: (userDataModel?.age)!, prefectureLabelString: (userDataModel?.prefecture)!, heightLabelString: (userDataModel?.height)!, bloodLabelStrng: (userDataModel?.bloodType)!, genderLabelString: (userDataModel?.gender)!, jobLabelString: (userDataModel?.job)!)
+            
+            return cell
+            
         default:
-            <#code#>
+            return UITableViewCell()
+            
+            
         }
         
-        
     }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if indexPath.row == 1 {
+            return 450
+        }else if indexPath.row == 2 {
+            return 370
+        }else if indexPath.row == 3 {
+            return 400
+        }
+        return 1
+    }
+    
     
     
     
