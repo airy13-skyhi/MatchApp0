@@ -92,7 +92,7 @@ class CreateNewUserViewController: UIViewController, UITextFieldDelegate, UIPick
             dataIntArray = ([Int])(130...200)
             return dataIntArray.count
         case 3:
-            dataStringArray = ["A型","B型","O型","AB型"]
+            dataStringArray = ["A","B","O","AB"]
             return dataStringArray.count
         case 4:
             dataStringArray = Util.prefectures()

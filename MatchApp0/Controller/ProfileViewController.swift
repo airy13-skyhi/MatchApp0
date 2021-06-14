@@ -6,18 +6,23 @@
 //
 
 import UIKit
+import Firebase
 
 
-
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LikeSendDelegate, GetlikeCountProtocol {
+    
     
     
     
     var userDataModel:UserDataModel?
-    var likeCount = 0
+    var likeCount = Int()
+    var likeFlag = Bool()
+    var loadDBModel = LoadDBModel()
+    
     
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var likeButton: UIButton!
     
     
     
@@ -30,7 +35,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.dataSource = self
         
         tableView.register(ProfileImageCell.nib(), forCellReuseIdentifier: ProfileImageCell.identifire)
+        tableView.register(ProfileTextCell.nib(), forCellReuseIdentifier: ProfileTextCell.identifire)
+        tableView.register(ProfileDetailCell.nib(), forCellReuseIdentifier: ProfileDetailCell.identifire)
         
+        loadDBModel.getlikeCountProtocol = self
+        loadDBModel.loadLikeCount(uuid: (userDataModel?.uid)!)
     }
     
     
@@ -91,6 +100,53 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     
+    @IBAction func likeAction(_ sender: Any) {
+        
+        if userDataModel?.uid != Auth.auth().currentUser?.uid {
+            
+            let sendDBModel = SendDBModel()
+            sendDBModel.likeSendDelegate = self
+            
+            
+            if self.likeFlag == false {
+                sendDBModel.sendToLike(likeFlag: true, thisUserID: (userDataModel?.uid)!)
+                
+            }else {
+                sendDBModel.sendToLike(likeFlag: false, thisUserID: (userDataModel?.uid)!)
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    
+    
+    func like() {
+        
+        Util.startAnimation(name: "heart", view: self.view)
+        
+        
+    }
+    
+    
+    func getLikeCount(likeCount: Int, likeFlag: Bool) {
+        
+        self.likeFlag = likeFlag
+        self.likeCount = likeCount
+        
+        if self.likeFlag == false {
+            likeButton.setImage(UIImage(named: "notLike"), for: .normal)
+            
+        }else {
+            
+            likeButton.setImage(UIImage(named: "like"), for: .normal)
+        }
+        
+        tableView.reloadData()
+    }
     
 
 }

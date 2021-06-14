@@ -97,7 +97,7 @@
                         <outlet property="ashiatoButton" destination="kAu-pu-K7x" id="fRB-P5-eV0"/>
                         <outlet property="collectionView" destination="4nb-gB-Jup" id="vFh-0O-XeO"/>
                         <outlet property="searchButton" destination="5bL-hK-TQF" id="Zy5-mF-8oG"/>
-                        <segue destination="cXZ-mL-M12" kind="presentation" modalPresentationStyle="fullScreen" id="dHQ-9I-5LU"/>
+                        <segue destination="cXZ-mL-M12" kind="presentation" identifier="inputVC" modalPresentationStyle="fullScreen" id="dHQ-9I-5LU"/>
                         <segue destination="fUX-5Y-Vp4" kind="show" id="01C-3U-S8I"/>
                     </connections>
                 </viewController>
@@ -179,7 +179,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="プロフィール記入"/>
                                 <connections>
-                                    <segue destination="kIA-O3-Icq" kind="presentation" modalPresentationStyle="fullScreen" id="ZCr-4v-QPn"/>
+                                    <segue destination="kIA-O3-Icq" kind="presentation" identifier="" modalPresentationStyle="fullScreen" id="ZCr-4v-QPn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="giA-me-n4R">
@@ -215,6 +215,22 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1544.6153846153845" y="768.48341232227483"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="le2-qB-9ab">
+            <objects>
+                <viewController id="A7t-7c-huN" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x51-fb-txj">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="AnZ-ey-Gez"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="aJe-I5-RZJ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mke-De-jpZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2294" y="1451"/>
         </scene>
         <!--Input Profile Text Controller-->
         <scene sceneID="odc-yn-FVG">
@@ -266,6 +282,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="hJf-ej-EZm" kind="relationship" relationship="viewControllers" id="2dg-PD-1QP"/>
+                        <segue destination="IJk-zK-pbA" kind="relationship" relationship="viewControllers" id="jzY-eu-KiC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HJ2-GM-d5B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -318,6 +335,9 @@
                                 <rect key="frame" x="168" y="655" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="notLike"/>
+                                <connections>
+                                    <action selector="likeAction:" destination="fUX-5Y-Vp4" eventType="touchUpInside" id="Jzc-kZ-odG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="u3T-DR-Uxc"/>
@@ -325,12 +345,32 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ety-8p-fqS"/>
                     <connections>
+                        <outlet property="likeButton" destination="1Sb-GU-sQq" id="51W-be-bwl"/>
                         <outlet property="tableView" destination="EIQ-bo-uHj" id="Hz7-b3-KWc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ekA-jg-gwS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2293.8461538461538" y="83.886255924170612"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="gpB-aU-wfI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IJk-zK-pbA" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="wwc-eG-sSg"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X7t-Fu-cf9">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="A7t-7c-huN" kind="relationship" relationship="rootViewController" id="h1H-oa-NgU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WSm-YM-1di" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1544.6153846153845" y="1450.9478672985781"/>
         </scene>
     </scenes>
     <resources>

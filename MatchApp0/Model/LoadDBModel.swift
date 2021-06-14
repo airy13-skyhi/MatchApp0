@@ -11,8 +11,11 @@ import Firebase
 protocol GetProfileDataProtocol {
     
     func getProfileData(userDataModelArray:[UserDataModel])
+}
+
+protocol GetlikeCountProtocol {
     
-    
+    func getLikeCount(likeCount:Int, likeFlag:Bool)
 }
 
 
@@ -22,7 +25,7 @@ class LoadDBModel {
     var db = Firestore.firestore()
     var profileModelArray = [UserDataModel]()
     var getProfileDataProtocol:GetProfileDataProtocol?
-    
+    var getlikeCountProtocol:GetlikeCountProtocol?
     
     
     func loadUsersProfile(gender:String) {
@@ -57,8 +60,43 @@ class LoadDBModel {
                 self.getProfileDataProtocol?.getProfileData(userDataModelArray: self.profileModelArray)
             }
             
-            
         }
+        
+    }
+    
+    
+    func loadLikeCount(uuid:String) {
+        
+        var likeFlag = Bool()
+        db.collection("Users").document(uuid).collection("like").addSnapshotListener { snapShot, error in
+            
+            if error != nil {
+                return
+            }
+            
+            if let snapShotDoc = snapShot?.documents {
+                
+                for doc in snapShotDoc {
+                    
+                    let data = doc.data()
+                    
+                    if doc.documentID == Auth.auth().currentUser?.uid {
+                        
+                        if let like = data["like"] as? Bool {
+                            
+                            
+                            
+                        }
+                    }
+                }
+                
+                let docCount = snapShotDoc.count
+                self.getlikeCountProtocol?.getLikeCount(likeCount: docCount, likeFlag: likeFlag)
+                
+            }
+        }
+        
+        
         
     }
     

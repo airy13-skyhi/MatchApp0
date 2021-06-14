@@ -49,9 +49,9 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
             
             
             let userData = KeyChainConfig.getkeyArrayData(key: "userData")
-            print(userData["gender"])
+            print(userData["gender"] as Any)
             
-            var loadDBModel = LoadDBModel()
+            let loadDBModel = LoadDBModel()
             loadDBModel.getProfileDataProtocol = self
             loadDBModel.loadUsersProfile(gender: userData["gender"] as! String)
             

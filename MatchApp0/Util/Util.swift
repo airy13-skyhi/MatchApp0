@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Hex
+import Lottie
 
 class Util{
     
@@ -25,6 +26,31 @@ class Util{
         button.layer.borderColor = UIColor.blue.cgColor
         button.setTitleColor(UIColor.white, for: .normal)
     }
+    
+    
+    static func startAnimation(name:String, view:UIView) {
+        
+        let animationView = AnimationView()
+        let animation = Animation.named(name)
+        
+        animationView.frame = view.bounds
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .playOnce
+        view.addSubview(animationView)
+        
+        animationView.play() { finished in
+            
+            if finished {
+                
+                animationView.removeFromSuperview()
+                
+            }
+            
+        }
+        
+    }
+    
     
 }
 
