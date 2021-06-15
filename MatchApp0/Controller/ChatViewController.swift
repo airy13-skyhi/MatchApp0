@@ -1,5 +1,5 @@
 //
-//  MatchListViewController.swift
+//  ChatViewController.swift
 //  MatchApp0
 //
 //  Created by Manabu Kuramochi on 2021/06/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MatchListViewController: UIViewController {
+class ChatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

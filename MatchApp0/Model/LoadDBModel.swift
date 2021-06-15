@@ -24,6 +24,14 @@ protocol GetLikeDataProtocol {
 }
 
 
+protocol GetWhoIsMatchListProtocol {
+    
+    func getWhoIsMatchListProtocol(userDataModelArray:[UserDataModel])
+    
+}
+
+
+
 class LoadDBModel {
     
     var db = Firestore.firestore()
@@ -31,6 +39,7 @@ class LoadDBModel {
     var getProfileDataProtocol:GetProfileDataProtocol?
     var getlikeCountProtocol:GetlikeCountProtocol?
     var getLikeDataProtocol:GetLikeDataProtocol?
+    var getWhoIsMatchListProtocol:GetWhoIsMatchListProtocol?
     
     func loadUsersProfile(gender:String) {
         
@@ -138,6 +147,48 @@ class LoadDBModel {
         }
         
     }
+    
+    
+    //collection(macthing)のデータ(人)を取得
+    func loadMatchPersonData() {
+        
+        db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").addSnapshotListener { snapShot, error in
+            
+            if error != nil {
+                print(error.debugDescription)
+                return
+            }
+            
+            if let snapShotDoc = snapShot?.documents {
+                
+                self.profileModelArray = []
+                
+                for doc in snapShotDoc {
+                    
+                    let data = doc.data()
+                    
+                    if let name = data["name"] as? String, let age = data["age"] as? String, let height = data["height"] as? String, let bloodType = data["bloodType"] as? String, let prefecture = data["prefecture"] as? String, let gender = data["gender"] as? String, let profile = data["profile"] as? String, let profileImageString = data["profileImageString"] as? String, let uid = data["uid"] as? String, let quickWord = data["quickWord"] as? String, let job = data["job"] as? String {
+                        
+                        
+                        let userDataModel = UserDataModel(name: name, age: age, height: height, bloodType: bloodType, prefecture: prefecture, gender: gender, profile: profile, profileImageString: profileImageString, uid: uid, quickWord: quickWord, job: job, date: 0, onlineORNot: true)
+                        
+                        self.profileModelArray.append(userDataModel)
+                        
+                    }
+                    
+                }
+                
+                self.getWhoIsMatchListProtocol?.getWhoIsMatchListProtocol(userDataModelArray: self.profileModelArray)
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
+    
     
     
 }
