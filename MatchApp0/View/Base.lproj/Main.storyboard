@@ -83,6 +83,9 @@
                                 <rect key="frame" x="213" y="101" width="82" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="足あと"/>
+                                <connections>
+                                    <segue destination="9LF-sk-SuF" kind="show" id="qik-Xs-8g0"/>
+                                </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ashiato" translatesAutoresizingMaskIntoConstraints="NO" id="3wq-ua-zFG">
                                 <rect key="frame" x="293" y="101" width="29" height="30"/>
@@ -263,21 +266,25 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="hpb-as-h3T"/>
+                    <connections>
+                        <segue destination="s5O-xF-EbY" kind="show" id="Zb8-eW-QOD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="raq-j8-PqG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2294" y="2175"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="BOz-Zc-Xgv">
             <objects>
-                <viewController id="s5O-xF-EbY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="chatVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="s5O-xF-EbY" customClass="ChatViewController" customModule="MatchApp0" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0VH-9z-SY7">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="duj-ga-3AV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Zg9-Ne-3el"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDo-nY-9mO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -360,6 +367,22 @@
             </objects>
             <point key="canvasLocation" x="844.92753623188412" y="83.705357142857139"/>
         </scene>
+        <!--Ashiato View Controller-->
+        <scene sceneID="7qu-dH-xok">
+            <objects>
+                <viewController id="9LF-sk-SuF" customClass="AshiatoViewController" customModule="MatchApp0" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ocn-wk-BW6">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="eHv-da-i6X"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5Nq-9R-kDb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JOz-A6-f3j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2294" y="-574"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="gbT-qb-eUz">
             <objects>
@@ -403,7 +426,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ekA-jg-gwS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2293.8461538461538" y="83.886255924170612"/>
+            <point key="canvasLocation" x="2294" y="83"/>
         </scene>
         <!--Item-->
         <scene sceneID="gpB-aU-wfI">

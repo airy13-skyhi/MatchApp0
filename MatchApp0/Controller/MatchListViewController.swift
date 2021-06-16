@@ -72,7 +72,13 @@ class MatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         return 100
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let chatVC = self.storyboard?.instantiateViewController(identifier: "chatVC") as! ChatViewController
+        
+        self.navigationController?.pushViewController(chatVC, animated: true)
+        
+    }
     
     func getWhoIsMatchListProtocol(userDataModelArray: [UserDataModel]) {
         

@@ -25,6 +25,7 @@
 		05D5B3152678553B00CCDFCA /* MatchPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D5B3132678553B00CCDFCA /* MatchPersonCell.swift */; };
 		05D5B3162678553B00CCDFCA /* MatchPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D5B3142678553B00CCDFCA /* MatchPersonCell.xib */; };
 		05D5B3182678CB3200CCDFCA /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D5B3172678CB3200CCDFCA /* ChatViewController.swift */; };
+		05D5B31A2678CC8700CCDFCA /* AshiatoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D5B3192678CC8700CCDFCA /* AshiatoViewController.swift */; };
 		05DE7D8C26686CB200C3A05F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8B26686CB200C3A05F /* AppDelegate.swift */; };
 		05DE7D8E26686CB200C3A05F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8D26686CB200C3A05F /* SceneDelegate.swift */; };
 		05DE7D9026686CB200C3A05F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DE7D8F26686CB200C3A05F /* ViewController.swift */; };
@@ -60,6 +61,7 @@
 		05D5B3132678553B00CCDFCA /* MatchPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPersonCell.swift; sourceTree = "<group>"; };
 		05D5B3142678553B00CCDFCA /* MatchPersonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MatchPersonCell.xib; sourceTree = "<group>"; };
 		05D5B3172678CB3200CCDFCA /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		05D5B3192678CC8700CCDFCA /* AshiatoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AshiatoViewController.swift; sourceTree = "<group>"; };
 		05DE7D8826686CB200C3A05F /* MatchApp0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MatchApp0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DE7D8B26686CB200C3A05F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05DE7D8D26686CB200C3A05F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				05D5B30B267717A900CCDFCA /* LikeListViewController.swift */,
 				05D5B3112678527B00CCDFCA /* MatchListViewController.swift */,
 				05D5B3172678CB3200CCDFCA /* ChatViewController.swift */,
+				05D5B3192678CC8700CCDFCA /* AshiatoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				05AF6FB2266F21A1006D30DE /* LoadDBModel.swift in Sources */,
 				05DE7DAC2669C6D600C3A05F /* Manager.swift in Sources */,
 				05D5B30F2677185D00CCDFCA /* LikeProfileCell.swift in Sources */,
+				05D5B31A2678CC8700CCDFCA /* AshiatoViewController.swift in Sources */,
 				05D5B30C267717A900CCDFCA /* LikeListViewController.swift in Sources */,
 				05DE7DB02669DA5A00C3A05F /* SendDBModel.swift in Sources */,
 				05AF6FB426707777006D30DE /* ProfileViewController.swift in Sources */,

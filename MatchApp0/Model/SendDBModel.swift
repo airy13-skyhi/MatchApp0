@@ -171,10 +171,19 @@ class SendDBModel {
         
         self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("like").document(thisUserID).delete()
         
+    }
+    
+    
+    
+    func sendAshiato(ashiatoUserID:String) {
+        
+        let userData = KeyChainConfig.getkeyArrayData(key: "userData")
+        
+        
+        self.db.collection("Users").document(ashiatoUserID).collection("ashiato").document(Auth.auth().currentUser!.uid).setData(["gender":userData["gender"] as Any, "uid":userData["uid"] as Any, "age":userData["age"] as Any, "height":userData["height"] as Any, "profileImageString":userData["profileImageString"] as Any, "prefecture":userData["prefecture"] as Any, "name":userData["name"] as Any, "quickWord":userData["quickWord"] as Any, "profile":userData["profile"] as Any, "bloodType":userData["bloodType"] as Any, "job":userData["job"] as Any, "date":Date().timeIntervalSince1970])
         
         
     }
-    
     
     
     
