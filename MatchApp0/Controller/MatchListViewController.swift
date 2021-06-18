@@ -76,6 +76,9 @@ class MatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let chatVC = self.storyboard?.instantiateViewController(identifier: "chatVC") as! ChatViewController
         
+        chatVC.userDataModel = matchingArray[indexPath.row]
+        chatVC.userData = userData
+        
         self.navigationController?.pushViewController(chatVC, animated: true)
         
     }

@@ -186,6 +186,44 @@ class SendDBModel {
     }
     
     
+    func sendImageData(image:UIImage, senderID:String, toID:String) {
+        
+        let userData = KeyChainConfig.getkeyArrayData(key: "userData")
+        
+        
+        let iamgeRef = Storage.storage().reference().child("ChatImages").child("\(UUID().uuidString + String(Date().timeIntervalSince1970))")
+        
+        
+        iamgeRef.putData(image.jpegData(compressionQuality: 0.3)!, metadata: nil) { metaData, error in
+            
+            if error != nil {
+                return
+            }
+            
+            
+            iamgeRef.downloadURL { url, error in
+                
+                if error != nil {
+                    return
+                }
+                
+                
+                if url != nil {
+                    
+                    self.db.collection("Users").document(senderID).collection("matching").document(toID).collection("chat").document().setData(["senderID":Auth.auth().currentUser!.uid, "displayname":userData["name"] as Any, "imageURLString":userData["profileImageString"] as Any, "date":Date().timeIntervalSince1970, "attachImageString":url?.absoluteString as Any])
+                    
+                    
+                    
+                    self.db.collection("Users").document(toID).collection("matching").document(senderID).collection("chat").document().setData(["senderID":Auth.auth().currentUser!.uid, "displayname":userData["name"] as Any, "imageURLString":userData["profileImageString"] as Any, "date":Date().timeIntervalSince1970, "attachImageString":url?.absoluteString as Any])
+                    
+                    
+                    
+                }
+                
+            }
+        }
+    }
+    
     
     
     
