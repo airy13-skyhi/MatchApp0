@@ -34,6 +34,11 @@ protocol GetAshiatoDataProtocol {
     func getAshiatoDataProtocol(userDataModelArray:[UserDataModel])
 }
 
+protocol GetSearchResultProtocol {
+    
+    func getSearchResultProtocol(userDataModelArray:[UserDataModel], searchDone:Bool)
+    
+}
 
 
 class LoadDBModel {
@@ -45,8 +50,14 @@ class LoadDBModel {
     var getLikeDataProtocol:GetLikeDataProtocol?
     var getWhoIsMatchListProtocol:GetWhoIsMatchListProtocol?
     var getAshiatoDataProtocol:GetAshiatoDataProtocol?
+    var getSearchResultProtocol:GetSearchResultProtocol?
+    var matchingIDArray = [String]()
+    
     
     func loadUsersProfile(gender:String) {
+        
+        let ownLikeListArray = KeyChainConfig.getKeyArrayListData(key: "ownLikeList")
+        
         
         db.collection("Users").whereField("gender", isNotEqualTo: gender).addSnapshotListener { snapShot, error in
             
@@ -64,15 +75,17 @@ class LoadDBModel {
                 for doc in snapShotDoc {
                     
                     let data = doc.data()
-                    if let name = data["name"] as? String, let age = data["age"] as? String, let height = data["height"] as? String, let bloodType = data["bloodType"] as? String, let prefecture = data["prefecture"] as? String, let gender = data["gender"] as? String, let profile = data["profile"] as? String, let profileImageString = data["profileImageString"] as? String, let uid = data["uid"] as? String, let quickWord = data["quickWord"] as? String, let job = data["job"] as? String, let onlinORNot = data["onlineORNot"] as? Bool {
-                        
-                        let userDataModel = UserDataModel(name: name, age: age, height: height, bloodType: bloodType, prefecture: prefecture, gender: gender, profile: profile, profileImageString: profileImageString, uid: uid, quickWord: quickWord, job: job, date: 0, onlineORNot: onlinORNot)
-                        
-                        
-                        self.profileModelArray.append(userDataModel)
-                        
-                    }
                     
+                    if ownLikeListArray.contains(data["uid"] as! String) != true {
+                        if let name = data["name"] as? String, let age = data["age"] as? String, let height = data["height"] as? String, let bloodType = data["bloodType"] as? String, let prefecture = data["prefecture"] as? String, let gender = data["gender"] as? String, let profile = data["profile"] as? String, let profileImageString = data["profileImageString"] as? String, let uid = data["uid"] as? String, let quickWord = data["quickWord"] as? String, let job = data["job"] as? String, let onlinORNot = data["onlineORNot"] as? Bool {
+                            
+                            let userDataModel = UserDataModel(name: name, age: age, height: height, bloodType: bloodType, prefecture: prefecture, gender: gender, profile: profile, profileImageString: profileImageString, uid: uid, quickWord: quickWord, job: job, date: 0, onlineORNot: onlinORNot)
+                            
+                            
+                            self.profileModelArray.append(userDataModel)
+                            
+                        }
+                    }
                 }
                 
                 self.getProfileDataProtocol?.getProfileData(userDataModelArray: self.profileModelArray)
@@ -174,6 +187,26 @@ class LoadDBModel {
                     
                     if let name = data["name"] as? String, let age = data["age"] as? String, let height = data["height"] as? String, let bloodType = data["bloodType"] as? String, let prefecture = data["prefecture"] as? String, let gender = data["gender"] as? String, let profile = data["profile"] as? String, let profileImageString = data["profileImageString"] as? String, let uid = data["uid"] as? String, let quickWord = data["quickWord"] as? String, let job = data["job"] as? String {
                         
+                        self.matchingIDArray = KeyChainConfig.getKeyArrayListData(key: "matchingID")
+                        
+                        
+                        if self.matchingIDArray.contains(where: {$0 == uid}) == false {
+                            
+                            if uid == Auth.auth().currentUser?.uid {
+                                
+                                self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").document(Auth.auth().currentUser!.uid).delete()
+                                
+                            }else {
+                                
+                                Util.matchNotification(name: name, id: uid)
+                                
+                                self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").document(Auth.auth().currentUser!.uid).delete()
+                                
+                                self.matchingIDArray.append(uid)
+                                KeyChainConfig.setKeyArrayData(value: self.matchingIDArray, key: "matchingID")
+                                
+                            }
+                        }
                         
                         let userDataModel = UserDataModel(name: name, age: age, height: height, bloodType: bloodType, prefecture: prefecture, gender: gender, profile: profile, profileImageString: profileImageString, uid: uid, quickWord: quickWord, job: job, date: 0, onlineORNot: true)
                         
@@ -220,6 +253,47 @@ class LoadDBModel {
                 
                 self.getAshiatoDataProtocol?.getAshiatoDataProtocol(userDataModelArray: self.profileModelArray)
             }
+            
+        }
+        
+    }
+    
+    
+    func loadSearch(ageMin:String, ageMax:String, heightMin:String, heightMax:String, blood:String, prefecture:String, userData:String) {
+        
+        db.collection("Users").whereField("age", isLessThan: ageMax).addSnapshotListener { snapShot, error in
+            
+            if error != nil {
+                print(error.debugDescription)
+                return
+            }
+            
+            if let snapShotDoc = snapShot?.documents {
+                
+                
+                self.profileModelArray = []
+                for doc in snapShotDoc {
+                    
+                    let data = doc.data()
+                    
+                    if let name = data["name"] as? String, let age = data["age"] as? String, let height = data["height"] as? String, let bloodType = data["bloodType"] as? String, let prefecture = data["prefecture"] as? String, let gender = data["gender"] as? String, let profile = data["profile"] as? String, let profileImageString = data["profileImageString"] as? String, let uid = data["uid"] as? String, let quickWord = data["quickWord"] as? String, let job = data["job"] as? String, let onlinORNot = data["onlineORNot"] as? Bool {
+                        
+                        let userDataModel = UserDataModel(name: name, age: age, height: height, bloodType: bloodType, prefecture: prefecture, gender: gender, profile: profile, profileImageString: profileImageString, uid: uid, quickWord: quickWord, job: job, date: 0, onlineORNot: onlinORNot)
+                        
+                        
+                        self.profileModelArray.append(userDataModel)
+                        self.profileModelArray = self.profileModelArray.filter {
+                            
+                            $0.bloodType == blood && $0.prefecture == prefecture && $0.age! >= ageMin && $0.age! <= ageMax && $0.height! >= heightMin && $0.height! <= heightMax && $0.gender != userData
+                        }
+                    }
+                    
+                }
+                
+                self.getSearchResultProtocol?.getSearchResultProtocol(userDataModelArray: self.profileModelArray, searchDone: true)
+                
+            }
+            
             
         }
         

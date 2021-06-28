@@ -10,13 +10,16 @@ import Firebase
 import SDWebImage
 
 
-class HumansViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GetProfileDataProtocol {
+class HumansViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GetProfileDataProtocol, GetLikeDataProtocol {
+    
     
     
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 2.0, bottom: 2.0, right: 2.0)
     let itemsPerRow:CGFloat = 2
     var searchORNot = Bool()
     var userDataModelArray = [UserDataModel]()
+    var db = Firestore.firestore()
+    var loadedLikeArray = [String]()
     
     
     
@@ -28,8 +31,8 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        Util.rectButton(button: searchButton)
+        Util.rectButton(button: ashiatoButton)
         
         
     }
@@ -39,6 +42,11 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(viewWillEnterForeground(_:)), name: UIScene.willEnterForegroundNotification, object: nil)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didEnterForeground(_:)), name: UIScene.didEnterBackgroundNotification, object: nil)
         
         
         if Auth.auth().currentUser?.uid != nil && searchORNot == false {
@@ -53,8 +61,15 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
             
             let loadDBModel = LoadDBModel()
             loadDBModel.getProfileDataProtocol = self
-            loadDBModel.loadUsersProfile(gender: userData["gender"] as! String)
+            loadDBModel.getLikeDataProtocol = self
             
+            loadDBModel.loadUsersProfile(gender: userData["gender"] as! String)
+            loadDBModel.loadLikeList()
+            
+            
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").document(Auth.auth().currentUser!.uid).setData(["gender":userData["gender"] as Any, "uid":userData["uid"] as Any, "age":userData["age"] as Any, "height":userData["height"] as Any, "profileImageString":userData["profileImageString"] as Any, "prefecture":userData["prefecture"] as Any, "name":userData["nicname"] as Any, "quickWord":userData["quickWord"] as Any, "profile":userData["profile"] as Any, "bloodType":userData["bloodType"] as Any, "job":userData["job"] as Any])
+            
+            loadDBModel.loadMatchPersonData()
             
         }else if Auth.auth().currentUser?.uid != nil && searchORNot == true {
             
@@ -70,9 +85,45 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
         
     }
     
+    @objc func viewWillEnterForeground(_ notification:Notification) {
+        
+        Util.updateOnlineStatus(onlineORNot: true)
+        
+    }
+    
+    
+    @objc func didEnterForeground(_ notification:Notification) {
+        
+        Util.updateOnlineStatus(onlineORNot: false)
+        
+    }
     
     
     func getProfileData(userDataModelArray: [UserDataModel]) {
+        
+        var deleteArray = [Int]()
+        var count = 0
+        
+        loadedLikeArray = []
+        self.userDataModelArray = userDataModelArray
+        loadedLikeArray = KeyChainConfig.getKeyArrayListData(key: "ownLikeList")
+        
+        for i in 0 ..< self.userDataModelArray.count  {
+            
+            if loadedLikeArray.contains(self.userDataModelArray[i].uid!) == true {
+                
+                deleteArray.append(i)
+            }
+        }
+        
+        for i in 0 ..< deleteArray.count {
+            
+            self.userDataModelArray.remove(at: deleteArray[i] - count)
+            count += 1
+        }
+        
+        
+        
         self.userDataModelArray = userDataModelArray
         collectionView.reloadData()
     }
@@ -143,7 +194,7 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
             
         }else {
             
-            onLineMarkImageView.image = UIImage(named: "offline")
+            onLineMarkImageView.image = UIImage(named: "offLine")
             
         }
         
@@ -159,6 +210,61 @@ class HumansViewController: UIViewController, UICollectionViewDelegate, UICollec
         profileVC.userDataModel = userDataModelArray[indexPath.row]
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
+    
+    
+    
+    @IBAction func search(_ sender: Any) {
+        
+        performSegue(withIdentifier: "searchVC", sender: nil)
+    }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "searchVC" {
+            
+            let userData = KeyChainConfig.getkeyArrayData(key: "userData")
+            
+            let searchVC = segue.destination as? SearchViewController
+            searchVC?.userData = userData["gender"] as! String
+            
+            
+            searchVC?.resultHandler = { userDataModelArray, searchDone in
+                
+                self.searchORNot = searchDone
+                self.userDataModelArray = userDataModelArray
+                self.collectionView.reloadData()
+                
+            }
+        }
+    }
+    
+    
+    func getLikeDataProtocol(userDataModelArray: [UserDataModel]) {
+        
+        var count = 0
+        var likeArray = [Int]()
+        
+        for i in 0 ..< userDataModelArray.count {
+            
+            if self.userDataModelArray.contains(userDataModelArray[i]) == true {
+                likeArray.append(i)
+            }
+        }
+        
+        for i in 0 ..< likeArray.count {
+            
+            self.userDataModelArray.remove(at: likeArray[i] - count)
+            count += 1
+        }
+        
+        print(self.userDataModelArray.count)
+        print(self.userDataModelArray.debugDescription)
+        
+        self.collectionView.reloadData()
+    }
+    
     
     
     

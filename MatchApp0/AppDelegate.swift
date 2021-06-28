@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let keychain = KeychainSwift()
         keychain.clear()
         
+        UINavigationBar.appearance().tintColor = Util.setChatColor(me: true)
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor:Util.setChatColor(me: true)]
+        (UINavigationBar.appearance()  as UINavigationBar).setBackgroundImage(UIImage(), for: .default)
         
         
         return true

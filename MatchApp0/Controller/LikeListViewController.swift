@@ -9,10 +9,7 @@ import UIKit
 
 
 
-class LikeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GetLikeDataProtocol {
-    
-    
-    
+class LikeListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GetLikeDataProtocol, GetWhoIsMatchListProtocol {
     
     
     
@@ -42,7 +39,9 @@ class LikeListViewController: UIViewController, UITableViewDelegate, UITableView
         
         let loadDBModel = LoadDBModel()
         loadDBModel.getLikeDataProtocol = self
+        loadDBModel.getWhoIsMatchListProtocol = self
         loadDBModel.loadLikeList()
+        loadDBModel.loadMatchPersonData()
         userData = KeyChainConfig.getkeyArrayData(key: "userData")
         tableView.reloadData()
     }
@@ -78,6 +77,38 @@ class LikeListViewController: UIViewController, UITableViewDelegate, UITableView
         self.userDataModelArray = userDataModelArray
         tableView.reloadData()
         
+    }
+    
+    
+    
+    func getWhoIsMatchListProtocol(userDataModelArray: [UserDataModel]) {
+        
+        
+        var count = 0
+        var matchArray = [Int]()
+        
+        
+        for i in 0 ..< userDataModelArray.count {
+            
+            if (self.userDataModelArray.firstIndex(where: {$0.uid == userDataModelArray[i].uid}) != nil) {
+                
+                matchArray.append(i)
+                
+            }
+        }
+        
+        
+        for i in 0 ..< matchArray.count {
+            
+            self.userDataModelArray.remove(at: matchArray[i] - count)
+            count += 1
+            
+        }
+        
+        print(self.userDataModelArray.count)
+        print(self.userData.debugDescription)
+        
+        self.tableView.reloadData()
     }
     
     

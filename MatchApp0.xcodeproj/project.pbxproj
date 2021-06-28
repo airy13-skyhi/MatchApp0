@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0594E4DE2686D46900D5BB3E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0594E4DD2686D46900D5BB3E /* SearchViewController.swift */; };
 		05AF6FAC266F12B4006D30DE /* heart.json in Resources */ = {isa = PBXBuildFile; fileRef = 05AF6FAB266F12B4006D30DE /* heart.json */; };
 		05AF6FAE266F15ED006D30DE /* KeyChainConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AF6FAD266F15ED006D30DE /* KeyChainConfig.swift */; };
 		05AF6FB0266F18AF006D30DE /* HumansViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AF6FAF266F18AF006D30DE /* HumansViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0594E4DD2686D46900D5BB3E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		05AF6FAB266F12B4006D30DE /* heart.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = heart.json; path = Resources/MatchImageResources/heart.json; sourceTree = SOURCE_ROOT; };
 		05AF6FAD266F15ED006D30DE /* KeyChainConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainConfig.swift; sourceTree = "<group>"; };
 		05AF6FAF266F18AF006D30DE /* HumansViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HumansViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				05D5B3112678527B00CCDFCA /* MatchListViewController.swift */,
 				05D5B3172678CB3200CCDFCA /* ChatViewController.swift */,
 				05D5B3192678CC8700CCDFCA /* AshiatoViewController.swift */,
+				0594E4DD2686D46900D5BB3E /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				05D5B30F2677185D00CCDFCA /* LikeProfileCell.swift in Sources */,
 				05D5B31A2678CC8700CCDFCA /* AshiatoViewController.swift in Sources */,
 				05D5B31C2679ADEF00CCDFCA /* Message.swift in Sources */,
+				0594E4DE2686D46900D5BB3E /* SearchViewController.swift in Sources */,
 				05D5B30C267717A900CCDFCA /* LikeListViewController.swift in Sources */,
 				05DE7DB02669DA5A00C3A05F /* SendDBModel.swift in Sources */,
 				05AF6FB426707777006D30DE /* ProfileViewController.swift in Sources */,

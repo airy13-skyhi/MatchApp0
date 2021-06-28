@@ -14,6 +14,8 @@ class LikeProfileCell: UITableViewCell {
     
     var userData = [String:Any]()
     var uid = String()
+    var profileImageViewString = String()
+    
     
     static let identifier = "LikeProfileCell"
     
@@ -50,6 +52,7 @@ class LikeProfileCell: UITableViewCell {
         
         self.uid = uid
         self.userData = userData
+        self.profileImageViewString = profileImageViewString
         
         Util.rectButton(button: likeButton)
     }
@@ -71,9 +74,12 @@ class LikeProfileCell: UITableViewCell {
         let sendDBModel = SendDBModel()
         sendDBModel.sendToLikeFromLike(likeFlag: true, thisUserID: self.uid, matchName: nicnameLabel.text!, matchID: self.uid)
         
+        print(self.uid)
+        print(self.userData["uid"].debugDescription)
         
         //マッチング成立＝collection(macthing)に入れる
-        sendDBModel.sendToMatchingList(thisUserID: self.uid, nicname: self.userData["nicname"] as! String, age: self.userData["age"] as! String, bloodType: self.userData["bloodType"] as! String, height: self.userData["height"] as! String, prefecture: self.userData["prefecture"] as! String, gender: self.userData["gender"] as! String, profile: self.userData["profile"] as! String, profileImageString: self.userData["profileImageString"] as! String, uid: self.userData["uid"] as! String, quickWord: self.userData["quickWord"] as! String, job: self.userData["job"] as! String, userData: self.userData)
+
+        sendDBModel.sendToMatchingList(thisUserID: self.uid, nicname: nicnameLabel.text!, age: ageLabel.text!, bloodType: bloodLabel.text!, height: heightLabel.text!, prefecture: prefectureLabel.text!, gender: genderLabel.text!, profile: "", profileImageString: self.profileImageViewString, uid: self.uid, quickWord: quickWordLabel.text!, job: jobLabel.text!, userData: self.userData)
         
     }
     

@@ -13,14 +13,18 @@ import Firebase
 protocol ProfileSendDone {
     
     func profileSendDone()
-    
 }
 
 protocol LikeSendDelegate {
     
     func like()
-    
 }
+
+protocol GetAttachProtocol {
+    
+    func getAttachProtocol(attachImageString:String)
+}
+
 
 
 class SendDBModel {
@@ -28,7 +32,7 @@ class SendDBModel {
     let db = Firestore.firestore()
     var profileSendDone:ProfileSendDone?
     var likeSendDelegate:LikeSendDelegate?
-    
+    var getAttachProtocol:GetAttachProtocol?
     
     func sendProfileData(userData:UserDataModel, profileImageData:Data) {
         
@@ -149,6 +153,9 @@ class SendDBModel {
             deleteToLike(thisUserID: Auth.auth().currentUser!.uid)
             deleteToLike(thisUserID: matchID)
             
+            self.db.collection("Users").document(matchID).collection("matching").document(matchID).delete()
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").document(Auth.auth().currentUser!.uid).delete()
+            
             self.likeSendDelegate?.like()
         }
         
@@ -157,9 +164,11 @@ class SendDBModel {
     
     func sendToMatchingList(thisUserID:String, nicname:String, age:String, bloodType:String, height:String, prefecture:String, gender:String, profile:String, profileImageString:String, uid:String, quickWord:String, job:String, userData:[String:Any]) {
         
-        if thisUserID != uid {
+        if thisUserID == uid {
             
-            self.db.collection("Users").document(thisUserID).collection("matching").document(Auth.auth().currentUser!.uid).setData(["gender":gender as Any, "uid":uid as Any, "age":age as Any, "height":height as Any, "profileImageString":profileImageString as Any, "prefecture":prefecture as Any, "name":nicname as Any, "quickWord":quickWord as Any, "profile":profile as Any, "bloodType":bloodType as Any, "job":job as Any])
+            self.db.collection("Users").document(thisUserID).collection("matching").document(Auth.auth().currentUser!.uid).setData(["gender":userData["gender"] as Any, "uid":userData["uid"] as Any, "age":userData["age"] as Any, "height":userData["height"] as Any, "profileImageString":userData["profileImageString"] as Any, "prefecture":userData["prefecture"] as Any, "name":userData["nicname"] as Any, "quickWord":userData["quickWord"] as Any, "profile":userData["profile"] as Any, "bloodType":userData["bloodType"] as Any, "job":userData["job"] as Any])
+            
+            self.db.collection("Users").document(Auth.auth().currentUser!.uid).collection("matching").document(thisUserID).setData(["gender":gender as Any, "uid":uid as Any, "age":age as Any, "height":height as Any, "profileImageString":profileImageString as Any, "prefecture":prefecture as Any, "name":nicname as Any, "quickWord":quickWord as Any, "profile":profile as Any, "bloodType":bloodType as Any, "job":job as Any])
             
         }else {
             
@@ -217,14 +226,21 @@ class SendDBModel {
                     self.db.collection("Users").document(toID).collection("matching").document(senderID).collection("chat").document().setData(["senderID":Auth.auth().currentUser!.uid, "displayname":userData["name"] as Any, "imageURLString":userData["profileImageString"] as Any, "date":Date().timeIntervalSince1970, "attachImageString":url?.absoluteString as Any])
                     
                     
-                    
+                    self.getAttachProtocol?.getAttachProtocol(attachImageString: url!.absoluteString)
                 }
                 
             }
         }
     }
     
-    
+    func sendMesage(senderID:String, toID:String, text:String, displayName:String, imageURLString:String) {
+        
+        
+        self.db.collection("Users").document(senderID).collection("matching").document(toID).collection("chat").document().setData(["text":text as Any, "senderID":senderID as Any, "displayName":displayName as Any, "imageURLString":imageURLString as Any, "date":Date().timeIntervalSince1970])
+        
+        
+        self.db.collection("Users").document(toID).collection("matching").document(senderID).collection("chat").document().setData(["text":text as Any, "senderID":Auth.auth().currentUser!.uid as Any, "displayName":displayName as Any, "imageURLString":imageURLString as Any, "date":Date().timeIntervalSince1970])
+    }
     
     
 }
